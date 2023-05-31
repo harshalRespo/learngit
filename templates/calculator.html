@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>iPhone Calculator</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="calculator">
+        <form action="/calculate" method="POST">
+            <input type="text" name="num1" placeholder="Number 1" required>
+            <input type="text" name="num2" placeholder="Number 2" required>
+            <div class="buttons">
+                <button class="button operator" name="operator" value="add">+</button>
+                <button class="button operator" name="operator" value="subtract">-</button>
+                <button class="button operator" name="operator" value="multiply">*</button>
+                <button class="button operator" name="operator" value="divide">/</button>
+            </div>
+            <button class="button equals" type="submit">=</button>
+        </form>
+        {% if result %}
+        <div class="result">
+            Result: {{ result }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -4,30 +4,25 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('calculator.html')
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
-    try:
-        num1 = float(request.form['num1'])
-        num2 = float(request.form['num2'])
-        operator = request.form['operator']
+    num1 = float(request.form['num1'])
+    num2 = float(request.form['num2'])
+    operator = request.form['operator']
+    result = None
 
-        if operator == '+':
-            result = num1 + num2
-        elif operator == '-':
-            result = num1 - num2
-        elif operator == '*':
-            result = num1 * num2
-        elif operator == '/':
-            result = num1 / num2
-        else:
-            raise ValueError("Invalid operator")
+    if operator == 'add':
+        result = num1 + num2
+    elif operator == 'subtract':
+        result = num1 - num2
+    elif operator == 'multiply':
+        result = num1 * num2
+    elif operator == 'divide':
+        result = num1 / num2
 
-        return render_template('result.html', result=result)
-    except (ValueError, ZeroDivisionError) as e:
-        error = str(e)
-        return render_template('error.html', error=error)
+    return render_template('calculator.html', result=result)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
